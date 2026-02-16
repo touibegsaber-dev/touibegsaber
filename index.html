@@ -7,15 +7,15 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
     <style>
         :root {
-            --primary: #00ff88; /* اللون الأخضر النيون */
-            --bg: #0f172a;      /* خلفية كحلة */
-            --card-bg: #1e293b; /* خلفية البطاقات */
-            --text: #e2e8f0;    /* لون النص */
+            --primary: #00ff88;
+            --bg: #0f172a;
+            --card-bg: #1e293b;
+            --text: #e2e8f0;
         }
         * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
-        body { background-color: var(--bg); color: var(--text); line-height: 1.6; }
+        body { background-color: var(--bg); color: var(--text); line-height: 1.6; overflow-x: hidden; }
         
-        /* الهيدر (الواجهة) */
+        /* الهيدر */
         header {
             min-height: 100vh;
             display: flex;
@@ -26,13 +26,13 @@
             background: radial-gradient(circle at center, #1e293b 0%, #0f172a 100%);
             padding: 20px;
         }
-        h1 { font-size: 3.5rem; margin-bottom: 10px; color: var(--primary); text-transform: uppercase; letter-spacing: 2px; text-shadow: 0 0 10px rgba(0, 255, 136, 0.3); }
-        p.subtitle { font-size: 1.3rem; opacity: 0.9; max-width: 700px; margin-bottom: 30px; color: #94a3b8; }
+        h1 { font-size: 2.8rem; margin-bottom: 15px; color: var(--primary); text-transform: uppercase; letter-spacing: 2px; text-shadow: 0 0 15px rgba(0, 255, 136, 0.3); }
+        p.subtitle { font-size: 1.1rem; opacity: 0.9; max-width: 700px; margin-bottom: 30px; color: #94a3b8; }
         
         /* الأزرار */
+        .btn-group { display: flex; gap: 15px; flex-wrap: wrap; justify-content: center; }
         .btn {
-            padding: 12px 35px;
-            background: var(--primary);
+            padding: 12px 25px;
             color: #0b1120;
             text-decoration: none;
             font-weight: 800;
@@ -41,66 +41,59 @@
             display: inline-flex;
             align-items: center;
             gap: 10px;
+            font-size: 0.9rem;
         }
-        .btn:hover { transform: scale(1.05); box-shadow: 0 0 25px rgba(0, 255, 136, 0.5); }
+        .btn-tele { background: #229ED9; color: white; }
+        .btn-what { background: #25D366; color: white; }
+        .btn-email { background: #EA4335; color: white; }
+        .btn:hover { transform: translateY(-3px); box-shadow: 0 5px 15px rgba(0,0,0,0.3); }
 
-        /* الأقسام العامة */
-        section { padding: 80px 20px; max-width: 1100px; margin: 0 auto; }
+        /* الأقسام */
+        section { padding: 60px 20px; max-width: 1100px; margin: 0 auto; }
         h2 { 
             text-align: center; 
-            margin-bottom: 50px; 
-            font-size: 2.2rem; 
+            margin-bottom: 40px; 
+            font-size: 1.8rem; 
             color: #fff;
             position: relative;
-            display: inline-block;
-            left: 50%;
-            transform: translateX(-50%);
         }
         h2::after {
             content: '';
             display: block;
-            width: 60px;
+            width: 50px;
             height: 4px;
             background: var(--primary);
             margin: 10px auto 0;
             border-radius: 2px;
         }
         
-        /* شبكة العرض */
-        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 25px; }
-        
-        /* البطاقات (Cards) */
+        /* البطاقات */
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; }
         .card {
             background: var(--card-bg);
-            padding: 30px;
-            border-radius: 20px;
+            padding: 25px;
+            border-radius: 15px;
             border: 1px solid rgba(255,255,255,0.05);
-            transition: 0.4s ease;
+            transition: 0.3s;
             position: relative;
-            overflow: hidden;
         }
-        .card:hover { transform: translateY(-10px); border-color: var(--primary); box-shadow: 0 10px 30px rgba(0,0,0,0.3); }
+        .card:hover { border-color: var(--primary); transform: translateY(-5px); }
+        .project-icon { font-size: 2rem; color: var(--primary); margin-bottom: 15px; }
+        .card h3 { margin-bottom: 10px; font-size: 1.3rem; color: #fff; }
+        .card p { font-size: 0.9rem; color: #cbd5e1; margin-bottom: 15px; }
         
-        /* أيقونات المشاريع */
-        .project-icon { font-size: 2.5rem; color: var(--primary); margin-bottom: 20px; }
-        .card h3 { margin-bottom: 15px; font-size: 1.4rem; color: #fff; }
-        .card p { font-size: 0.95rem; color: #cbd5e1; margin-bottom: 15px; }
-        
-        /* التاغات (Tags) للمهارات داخل المشاريع */
-        .tags { display: flex; gap: 10px; flex-wrap: wrap; margin-top: auto; }
-        .tag { background: rgba(0, 255, 136, 0.1); color: var(--primary); padding: 5px 12px; border-radius: 15px; font-size: 0.8rem; font-weight: bold; }
+        .tags { display: flex; gap: 8px; flex-wrap: wrap; margin-top: auto; }
+        .tag { background: rgba(0, 255, 136, 0.1); color: var(--primary); padding: 4px 10px; border-radius: 10px; font-size: 0.75rem; font-weight: bold; }
 
-        /* قسم المهارات (Skills Bar) */
-        .skills-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 20px; text-align: center; }
-        .skill-box { background: #1e293b; padding: 20px; border-radius: 15px; transition: 0.3s; }
-        .skill-box:hover { background: #263345; }
-        .skill-box i { font-size: 2.5rem; margin-bottom: 10px; }
+        /* المهارات */
+        .skills-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(100px, 1fr)); gap: 10px; text-align: center; }
+        .skill-box { background: #1e293b; padding: 15px; border-radius: 12px; }
+        .skill-box i { font-size: 1.8rem; margin-bottom: 8px; }
+        .skill-box h4 { font-size: 0.9rem; }
 
-        /* الفوتر */
-        footer { text-align: center; padding: 40px; background: #0b1120; margin-top: 50px; border-top: 1px solid rgba(255,255,255,0.05); }
+        footer { text-align: center; padding: 30px; background: #0b1120; margin-top: 40px; font-size: 0.8rem; opacity: 0.7; }
         
-        /* تجاوب الهاتف */
-        @media (max-width: 600px) { h1 { font-size: 2.2rem; } h2 { font-size: 1.8rem; } }
+        @media (max-width: 600px) { h1 { font-size: 2rem; } h2 { font-size: 1.5rem; } }
     </style>
 </head>
 <body>
@@ -108,34 +101,21 @@
     <header>
         <h1>SABER DEV</h1>
         <p class="subtitle">طالب بالمدرسة العليا للأساتذة | مطور حلول ذكية | مبرمج تطبيقات</p>
-        <div style="margin-top: 20px;">
-            <a href="#contact" class="btn">تواصل معي <i class="fas fa-paper-plane"></i></a>
+        <div class="btn-group">
+            <a href="https://t.me/sabertouibeg" class="btn btn-tele"><i class="fab fa-telegram-plane"></i> تيليجرام</a>
+            <a href="https://wa.me/213556837872" class="btn btn-what"><i class="fab fa-whatsapp"></i> واتساب</a>
         </div>
     </header>
 
     <section id="skills">
         <h2>مهاراتي التقنية</h2>
         <div class="skills-grid">
-            <div class="skill-box">
-                <i class="fab fa-python" style="color: #3776AB;"></i>
-                <h4>Python</h4>
-            </div>
-            <div class="skill-box">
-                <i class="fab fa-java" style="color: #f89820;"></i>
-                <h4>Java</h4>
-            </div>
-            <div class="skill-box">
-                <i class="fas fa-project-diagram" style="color: #ff6b6b;"></i>
-                <h4>n8n Automation</h4>
-            </div>
-            <div class="skill-box">
-                <i class="fab fa-html5" style="color: #E34F26;"></i>
-                <h4>HTML5 & CSS</h4>
-            </div>
-            <div class="skill-box">
-                <i class="fas fa-mobile-alt" style="color: #00ff88;"></i>
-                <h4>Kivy (Android)</h4>
-            </div>
+            <div class="skill-box"><i class="fab fa-python" style="color: #3776AB;"></i><h4>Python</h4></div>
+            <div class="skill-box"><i class="fab fa-java" style="color: #f89820;"></i><h4>Java</h4></div>
+            <div class="skill-box"><i class="fas fa-project-diagram" style="color: #ff6b6b;"></i><h4>n8n</h4></div>
+            <div class="skill-box"><i class="fab fa-google" style="color: #34A853;"></i><h4>Google Sheets</h4></div>
+            <div class="skill-box"><i class="fas fa-mobile-alt" style="color: #00ff88;"></i><h4>Kivy</h4></div>
+            <div class="skill-box"><i class="fab fa-html5" style="color: #E34F26;"></i><h4>HTML & CSS</h4></div>
         </div>
     </section>
 
@@ -144,56 +124,43 @@
         <div class="grid">
             
             <div class="card">
-                <i class="fas fa-crosshairs project-icon"></i>
-                <h3>نظام "القنص" (The Sniper Bot)</h3>
-                <p>نظام أتمتة ذكي (Real-time) لمتجر إلكتروني، يقوم بصيد الطلبيات المنسية (30-35 دقيقة) وإرسال تنبيهات فورية للتيليجرام لمنع التكرار وضياع المبيعات.</p>
-                <div class="tags">
-                    <span class="tag">n8n</span>
-                    <span class="tag">API Integration</span>
-                    <span class="tag">Automation</span>
-                </div>
+                <i class="fas fa-clock project-icon"></i>
+                <h3>نظام التنبيه الذكي (30 دقيقة)</h3>
+                <p>نظام أوتوماتيكي يراقب الطلبيات، ويرسل تنبيهات فورية لأي طلبية تمر عليها 30 دقيقة بدون معالجة، لضمان عدم نسيان أي زبون.</p>
+                <div class="tags"><span class="tag">n8n</span><span class="tag">Automation</span><span class="tag">Real-time</span></div>
             </div>
 
             <div class="card">
-                <i class="fas fa-boxes project-icon"></i>
-                <h3>نظام تقسيم الطلبيات (Order Splitter)</h3>
-                <p>مشروع برمجي لتنظيم وفرز الطلبيات المعقدة وتوزيعها أوتوماتيكياً لتسهيل عملية الشحن والتوصيل، مما قلل نسبة الخطأ البشري.</p>
-                <div class="tags">
-                    <span class="tag">Python</span>
-                    <span class="tag">Data Processing</span>
-                    <span class="tag">Logic</span>
-                </div>
+                <i class="fas fa-file-excel project-icon"></i>
+                <h3>نظام توزيع المهام العادل</h3>
+                <p>نظام ذكي مبني على Google Sheets يقوم بتوزيع الطلبيات أوتوماتيكياً على العمال، بحيث يتم توجيه الطلبية الجديدة للعامل الذي يمتلك أقل عدد من الطلبيات.</p>
+                <div class="tags"><span class="tag">Google Sheets</span><span class="tag">Logic</span><span class="tag">Load Balancing</span></div>
             </div>
 
             <div class="card">
                 <i class="fas fa-graduation-cap project-icon"></i>
-                <h3>تطبيق "تدارك" (Tadarak App)</h3>
-                <p>تطبيق أندرويد تعليمي شامل، يحتوي على حاسبة معدلات دقيقة للطلاب، وخرائط توجيهية للجامعة، تم برمجته بالكامل بـ Python و مكتبة Kivy.</p>
-                <div class="tags">
-                    <span class="tag">Python</span>
-                    <span class="tag">Kivy</span>
-                    <span class="tag">Android Dev</span>
-                </div>
+                <h3>تطبيق "تدارك" (ولاية الجلفة)</h3>
+                <p>تطبيق رسمي لمديرية التربية لولاية الجلفة. يوفر دروس وحساب المعدلات لتلاميذ البكالوريا و BEM، مبرمج بـ Python و Kivy.</p>
+                <div class="tags"><span class="tag">Kivy</span><span class="tag">Education</span><span class="tag">Gov Project</span></div>
             </div>
 
         </div>
     </section>
 
     <section id="contact">
-        <h2>ابدأ مشروعك القادم</h2>
-        <div class="card" style="text-align: center; max-width: 600px; margin: 0 auto; border-color: var(--primary);">
-            <i class="fas fa-comments project-icon"></i>
-            <p style="font-size: 1.1rem; color: #fff;">هل لديك فكرة مشروع أو مشكلة تقنية؟ أنا هنا لتحويل الأفكار إلى واقع برمجي.</p>
-            <br>
-            <a href="https://t.me/اسم_المستخدم_تاعك" class="btn" style="background: #229ED9; color: white;">
-                <i class="fab fa-telegram-plane"></i> راسلني على تيليجرام
-            </a>
+        <h2>تواصل معي</h2>
+        <div class="card" style="text-align: center; max-width: 600px; margin: 0 auto;">
+            <p style="margin-bottom: 20px;">جاهز للعمل على مشروعك القادم. اختر وسيلة التواصل المناسبة لك:</p>
+            <div class="btn-group">
+                <a href="https://t.me/sabertouibeg" class="btn btn-tele"><i class="fab fa-telegram-plane"></i> Telegram</a>
+                <a href="https://wa.me/213556837872" class="btn btn-what"><i class="fab fa-whatsapp"></i> WhatsApp</a>
+                <a href="mailto:touibegsabertg@gmail.com" class="btn btn-email"><i class="fas fa-envelope"></i> Email</a>
+            </div>
         </div>
     </section>
 
     <footer>
-        <p>تم التصميم والتطوير بواسطة <strong>Saber</strong> © 2026</p>
-        <p style="font-size: 0.8rem; margin-top: 10px; opacity: 0.6;">Built with HTML, CSS & Passion</p>
+        <p>تم التطوير بواسطة <strong>Saber</strong> © 2026</p>
     </footer>
 
 </body>
